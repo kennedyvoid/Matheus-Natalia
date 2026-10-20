@@ -48,7 +48,7 @@ function doPost(e) {
     }
 
     // ==========================================
-    // 2. AÇÃO: CONFIRMAR PRESENÇA (RSVP) — até 3 pessoas por vez
+    // 2. AÇÃO: CONFIRMAR PRESENÇA (RSVP) — várias pessoas por vez (máx. 20)
     // Colunas: A Nome | B Adulto/Criança | C Data/hora | D Confirmado por
     // ==========================================
     if (action === "rsvp") {
@@ -57,7 +57,7 @@ function doPost(e) {
       var agora = new Date().toLocaleString("pt-BR");
       var confirmadoPor = String(pessoas[0].nome || "").trim();
 
-      pessoas.slice(0, 3).forEach(function (pessoa) {
+      pessoas.slice(0, 20).forEach(function (pessoa) {
         var nome = String((pessoa && pessoa.nome) || "").trim();
         if (!nome) return;
         var tipo = pessoa.tipo === "Criança" ? "Criança" : "Adulto";

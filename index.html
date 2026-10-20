@@ -261,6 +261,7 @@
             color: var(--lavender-600);
             font-variant-numeric: lining-nums;
             line-height: 1.2;
+            text-wrap: balance;
         }
 
         .hero-date .date-day {
@@ -388,6 +389,38 @@
         .rsvp-person-title { font-size: .9rem; color: var(--text-main); }
         .rsvp-remove { color: var(--lavender-600); text-decoration: none; font-size: .8rem; }
         .rsvp-remove:hover { color: var(--plum); text-decoration: underline; }
+
+        .rsvp-add {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto 18px;
+            padding: 4px 8px;
+            background: none;
+            border: none;
+            color: var(--lavender-600);
+            font-size: .85rem;
+        }
+        .rsvp-add .plus {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--lavender-400);
+            background: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            line-height: 1;
+            color: var(--lavender-600);
+            transition: all .25s;
+        }
+        .rsvp-add:hover .plus {
+            background: var(--lavender-600);
+            border-color: var(--lavender-600);
+            color: #fff;
+        }
         .admin-status.ok { color: #4f7a4a; }
         .admin-status.err { color: #a2445a; }
 
@@ -468,9 +501,12 @@
                 <div class="soft-card p-3 p-sm-4">
                     <h2 class="text-center mb-4 section-title">Confirmar Presença</h2>
                     <div id="rsvp-form">
-                        <p class="text-muted text-center mb-3" style="font-size: .9rem;">Você pode confirmar só você ou até 3 pessoas de uma vez.</p>
+                        <p class="text-muted text-center mb-3" style="font-size: .9rem;">Vai levar alguém? Toque no <strong>+</strong> para adicionar mais pessoas.</p>
                         <div id="rsvp-people"></div>
-                        <button type="button" class="btn btn-outline-lavender w-100 mb-3 py-2" id="rsvp-add-btn" onclick="addRsvpPerson(true)">+ Adicionar acompanhante</button>
+                        <button type="button" class="rsvp-add" id="rsvp-add-btn" onclick="addRsvpPerson(true)" aria-label="Adicionar pessoa">
+                            <span class="plus" aria-hidden="true">+</span>
+                            <span>Adicionar pessoa</span>
+                        </button>
                         <button class="btn btn-lavender w-100 py-2" onclick="submitRSVP()">Confirmar Presença</button>
                         <p class="admin-status err mt-2 mb-0 text-center" id="rsvp-status"></p>
                     </div>
@@ -546,7 +582,7 @@
         </section>
     </main>
 
-    <footer class="text-center pb-4">
+    <footer class="text-center pb-4 px-3">
         <span class="script" style="font-size: 1.6rem;">Natalia e Matheus</span><br>
         Com carinho, obrigado por fazer parte deste momento ♡
     </footer>
@@ -860,8 +896,8 @@
             setTimeout(() => { loadGifts(); }, 3500);
         }
 
-        // ---------- Confirmação de presença: até 3 pessoas por vez ----------
-        const RSVP_MAX = 3;
+        // ---------- Confirmação de presença: a pessoa adiciona quantos quiser (limite de segurança) ----------
+        const RSVP_MAX = 20;
 
         function addRsvpPerson(focus) {
             const list = document.getElementById('rsvp-people');
@@ -887,6 +923,7 @@
                 </div>
             `;
             row.querySelector('.rsvp-remove').addEventListener('click', () => {
+                if (row === list.firstElementChild) return; // o primeiro nome é sempre obrigatório
                 row.remove();
                 refreshRsvpPeople();
             });

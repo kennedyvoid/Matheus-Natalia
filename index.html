@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chá de Cozinha • Matheus e Natália</title>
+    <title>Chá de Cozinha • Natalia e Matheus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -31,6 +31,7 @@
 
         h1, h2, h3, h4, h5, .navbar-brand, .serif {
             font-family: 'Cormorant Garamond', serif;
+            font-variant-numeric: lining-nums;
             color: var(--plum);
         }
 
@@ -253,10 +254,29 @@
 
         .hero-date {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: clamp(1.5rem, 4.5vw, 2rem);
+            font-weight: 500;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--lavender-600);
+            font-variant-numeric: lining-nums;
+            line-height: 1.2;
+        }
+
+        .hero-date .date-day {
+            font-size: 1.9em;
+            font-weight: 600;
+            color: var(--plum);
+            vertical-align: -0.12em;
+        }
+
+        .hero-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.25rem, 3.8vw, 1.6rem);
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--plum);
+            font-variant-numeric: lining-nums;
         }
 
         .section-title {
@@ -357,6 +377,17 @@
         }
 
         .admin-status { font-size: .85rem; min-height: 1.3em; }
+
+        .rsvp-person {
+            background: #fff;
+            border: 1px solid var(--lavender-100);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .rsvp-person-title { font-size: .9rem; color: var(--text-main); }
+        .rsvp-remove { color: var(--lavender-600); text-decoration: none; font-size: .8rem; }
+        .rsvp-remove:hover { color: var(--plum); text-decoration: underline; }
         .admin-status.ok { color: #4f7a4a; }
         .admin-status.err { color: #a2445a; }
 
@@ -365,7 +396,7 @@
             .navbar-brand { font-size: 1.6rem; margin-right: 0; }
             .navbar-nav { gap: .25rem 1rem !important; }
             .nav-link { font-size: .7rem; letter-spacing: .5px; padding: .35rem 0 !important; }
-            .hero-date { font-size: 1.1rem; letter-spacing: 2px; }
+            .hero-date { letter-spacing: 2px; }
             .gift-img { height: 220px; }
             .form-control, .form-select { font-size: 16px; } /* evita zoom automático no iPhone */
             .modal-dialog { margin: .75rem; }
@@ -388,7 +419,7 @@
             <p class="intro-kicker fade-up d3">Bem-vindos ao</p>
             <h1 class="script intro-title fade-up d3">Chá de Cozinha</h1>
             <div class="divider fade-up d4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/></svg></div>
-            <p class="script intro-names fade-up d4">Matheus e Natália</p>
+            <p class="script intro-names fade-up d4">Natalia e Matheus</p>
 
             <img src="img/ilustracao.jpg" alt="Ilustração de utensílios de cozinha com lavandas" class="intro-illustration fade-up d5">
             <button class="btn-enter fade-up d6" onclick="enterSite()">Entrar</button>
@@ -398,7 +429,7 @@
     <!-- ===================== SITE ===================== -->
     <nav class="navbar navbar-expand-lg sticky-top">
         <div class="container flex-wrap justify-content-center justify-content-lg-between">
-            <span class="navbar-brand">Matheus e Natália</span>
+            <span class="navbar-brand">Natalia e Matheus</span>
             <div class="navbar-nav flex-row flex-wrap justify-content-center gap-3">
                 <a class="nav-link active" href="#" id="view-gifts-btn" onclick="showPage('gifts-page'); return false;">Lista de Presentes</a>
                 <a class="nav-link" href="#" id="view-rsvp-btn" onclick="showPage('rsvp-page'); return false;">Confirmar Presença</a>
@@ -410,10 +441,11 @@
     <div class="container px-3">
     <header class="text-center my-4 my-md-5 py-4 py-md-5 px-3 soft-card hero">
         <p class="serif text-uppercase mb-1" style="letter-spacing: 4px; font-size: 1.1rem;">Chá de Cozinha</p>
-        <h1 class="script names mb-2">Matheus e Natália</h1>
+        <h1 class="script names mb-2">Natalia e Matheus</h1>
         <div class="divider mx-auto my-3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"/></svg></div>
-        <p class="hero-date mb-3" id="event-date" data-date="2026-06-20">20 de Junho de 2026</p>
-        <p class="mb-1 event-address"><strong>Endereço:</strong> <span id="event-address">Av. Nordestina, 3010 - Cidade Nova São Miguel</span></p>
+        <p class="hero-date mb-1" id="event-date" data-date="2026-06-20"><span class="date-day">20</span> de Junho de 2026</p>
+        <p class="hero-time mb-3" id="event-time" data-time="" hidden></p>
+        <p class="mb-1 mt-3 event-address"><strong>Endereço:</strong> <span id="event-address">Av. Nordestina, 3010 - Cidade Nova São Miguel</span></p>
         <p class="text-muted mb-3 event-address" style="font-size: 0.9rem;" id="event-city">São Paulo - SP, 08042-117</p>
         <a id="event-map" href="#" target="_blank" rel="noopener" class="btn btn-outline-lavender btn-sm px-3">Ver no mapa ↗</a>
     </header>
@@ -436,18 +468,11 @@
                 <div class="soft-card p-3 p-sm-4">
                     <h2 class="text-center mb-4 section-title">Confirmar Presença</h2>
                     <div id="rsvp-form">
-                        <div class="mb-3">
-                            <label class="form-label">Nome Completo</label>
-                            <input type="text" id="rsvp-name" class="form-control" placeholder="Digite seu nome e sobrenome">
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label">Você é Adulto ou Criança?</label>
-                            <select id="rsvp-type" class="form-select">
-                                <option value="Adulto" selected>Adulto</option>
-                                <option value="Criança">Criança</option>
-                            </select>
-                        </div>
+                        <p class="text-muted text-center mb-3" style="font-size: .9rem;">Você pode confirmar só você ou até 3 pessoas de uma vez.</p>
+                        <div id="rsvp-people"></div>
+                        <button type="button" class="btn btn-outline-lavender w-100 mb-3 py-2" id="rsvp-add-btn" onclick="addRsvpPerson(true)">+ Adicionar acompanhante</button>
                         <button class="btn btn-lavender w-100 py-2" onclick="submitRSVP()">Confirmar Presença</button>
+                        <p class="admin-status err mt-2 mb-0 text-center" id="rsvp-status"></p>
                     </div>
                     <div id="rsvp-success" style="display: none;" class="text-center py-4"></div>
                 </div>
@@ -465,7 +490,8 @@
                             <label class="form-label" for="admin-pass">Senha de Acesso</label>
                             <input type="password" id="admin-pass" class="form-control" placeholder="Digite a senha" onkeydown="if(event.key === 'Enter') checkAdminPass()">
                         </div>
-                        <button class="btn btn-lavender w-100 py-2" onclick="checkAdminPass()">Entrar</button>
+                        <button class="btn btn-lavender w-100 py-2" id="login-btn" onclick="checkAdminPass()">Entrar</button>
+                        <p class="admin-status mt-2 mb-0 text-center" id="login-status"></p>
                     </div>
                 </div>
             </div>
@@ -474,9 +500,15 @@
                 <div class="col-12 col-lg-6">
                     <div class="soft-card p-3 p-sm-4 h-100">
                         <h3 class="admin-card-title mb-3">Dados do Evento</h3>
-                        <div class="mb-3">
-                            <label class="form-label" for="admin-date">Data do evento</label>
-                            <input type="date" id="admin-date" class="form-control">
+                        <div class="row g-3 mb-3">
+                            <div class="col-7">
+                                <label class="form-label" for="admin-date">Data do evento</label>
+                                <input type="date" id="admin-date" class="form-control">
+                            </div>
+                            <div class="col-5">
+                                <label class="form-label" for="admin-time">Horário</label>
+                                <input type="time" id="admin-time" class="form-control">
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="admin-address">Endereço (rua, número e bairro)</label>
@@ -506,7 +538,8 @@
                             <label class="form-label" for="item-img">URL da Imagem</label>
                             <input type="url" id="item-img" class="form-control" placeholder="https://...">
                         </div>
-                        <button class="btn btn-lavender w-100 py-2" onclick="addGiftItem()">Cadastrar Presente</button>
+                        <button class="btn btn-lavender w-100 py-2" id="add-gift-btn" onclick="addGiftItem()">Cadastrar Presente</button>
+                        <p class="admin-status mt-2 mb-0 text-center" id="gift-status"></p>
                     </div>
                 </div>
             </div>
@@ -514,7 +547,7 @@
     </main>
 
     <footer class="text-center pb-4">
-        <span class="script" style="font-size: 1.6rem;">Matheus e Natália</span><br>
+        <span class="script" style="font-size: 1.6rem;">Natalia e Matheus</span><br>
         Com carinho, obrigado por fazer parte deste momento ♡
     </footer>
 
@@ -552,6 +585,7 @@
             myModal = new bootstrap.Modal(document.getElementById('reserveModal'));
             document.body.style.overflow = 'hidden';
             updateMapLink();
+            addRsvpPerson(false);
             loadGifts();
             loadEventInfo();
         });
@@ -578,33 +612,104 @@
             document.getElementById('view-admin-btn').classList.toggle('active', pageId === 'admin-page');
         }
 
-        function checkAdminPass() {
-            if(document.getElementById('admin-pass').value === 'nay2026') {
-                document.getElementById('admin-auth').style.display = 'none';
-                document.getElementById('admin-form').style.display = 'flex';
-                document.getElementById('admin-date').value = document.getElementById('event-date').dataset.date;
-                document.getElementById('admin-address').value = document.getElementById('event-address').textContent;
-                document.getElementById('admin-city').value = document.getElementById('event-city').textContent;
-            } else {
-                alert('Senha incorreta!');
+        // ---------- Admin: a senha é conferida no Apps Script (não fica no site) ----------
+        let adminPass = '';
+
+        function setStatus(id, texto, tipo = '') {
+            const el = document.getElementById(id);
+            el.className = `admin-status mt-2 mb-0 text-center ${tipo}`;
+            el.textContent = texto;
+        }
+
+        // POST que lê a resposta do Apps Script (JSON)
+        async function postAPI(params) {
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(params).toString()
+            });
+            const text = await res.text();
+            try {
+                return JSON.parse(text);
+            } catch (err) {
+                return { ok: false, erro: 'api-desatualizada' };
             }
         }
 
-        // ---------- Dados do evento: data e endereço (salvos na planilha via Apps Script) ----------
+        function apiErrorMessage(res) {
+            if (res.erro === 'senha') return 'Senha incorreta!';
+            if (res.erro === 'sem-senha') return 'A senha ainda não foi cadastrada no Apps Script (ADMIN_SENHA).';
+            if (res.erro === 'api-desatualizada') return 'O Apps Script precisa ser atualizado com o código novo.';
+            return 'Não foi possível concluir. Tente novamente.';
+        }
+
+        function logoutAdmin(message) {
+            adminPass = '';
+            document.getElementById('admin-form').style.display = 'none';
+            document.getElementById('admin-auth').style.display = '';
+            setStatus('login-status', message, 'err');
+        }
+
+        async function checkAdminPass() {
+            const senha = document.getElementById('admin-pass').value;
+            const btn = document.getElementById('login-btn');
+            if (!senha) {
+                setStatus('login-status', 'Digite a senha.', 'err');
+                return;
+            }
+
+            btn.disabled = true;
+            setStatus('login-status', 'Verificando...');
+            try {
+                const res = await postAPI({ action: 'login', senha });
+                if (!res.ok) {
+                    setStatus('login-status', apiErrorMessage(res), 'err');
+                    return;
+                }
+                adminPass = senha;
+                document.getElementById('admin-pass').value = '';
+                setStatus('login-status', '');
+                document.getElementById('admin-auth').style.display = 'none';
+                document.getElementById('admin-form').style.display = 'flex';
+                document.getElementById('admin-date').value = document.getElementById('event-date').dataset.date;
+                document.getElementById('admin-time').value = document.getElementById('event-time').dataset.time;
+                document.getElementById('admin-address').value = document.getElementById('event-address').textContent;
+                document.getElementById('admin-city').value = document.getElementById('event-city').textContent;
+            } catch (err) {
+                setStatus('login-status', 'Sem conexão com o servidor. Tente novamente.', 'err');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        // ---------- Dados do evento: data, horário e endereço (salvos na planilha via Apps Script) ----------
         const MESES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
         function formatDate(iso) {
             const [ano, mes, dia] = String(iso).split('-').map(Number);
             if (!ano || !mes || !dia) return null;
-            return `${dia} de ${MESES[mes - 1]} de ${ano}`;
+            return { dia, resto: `de ${MESES[mes - 1]} de ${ano}` };
         }
 
         function applyDate(iso) {
-            const texto = formatDate(iso);
-            if (!texto) return;
+            const partes = formatDate(iso);
+            if (!partes) return;
             const el = document.getElementById('event-date');
             el.dataset.date = iso;
-            el.textContent = texto;
+            el.innerHTML = `<span class="date-day">${partes.dia}</span> ${escapeHTML(partes.resto)}`;
+        }
+
+        function applyTime(hhmm) {
+            const el = document.getElementById('event-time');
+            const [h, m] = String(hhmm || '').split(':');
+            if (!h) {
+                el.dataset.time = '';
+                el.hidden = true;
+                return;
+            }
+            el.dataset.time = `${h}:${m || '00'}`;
+            el.textContent = `às ${Number(h)}h${m && m !== '00' ? m : ''}`;
+            el.hidden = false;
         }
 
         function updateMapLink() {
@@ -632,46 +737,37 @@
             // Se o Apps Script ainda não tiver a ação 'config', ele devolve a lista de presentes: mantemos os dados padrão
             if (!config || Array.isArray(config)) return;
             applyDate(config.data);
+            applyTime(config.hora);
             applyAddress(config.endereco, config.cidade);
         }
 
         async function saveEventInfo() {
             const data = document.getElementById('admin-date').value;
+            const hora = document.getElementById('admin-time').value;
             const endereco = document.getElementById('admin-address').value.trim();
             const cidade = document.getElementById('admin-city').value.trim();
-            const status = document.getElementById('address-status');
             const btn = document.getElementById('save-address-btn');
 
             if (!data || !endereco) {
-                status.className = 'admin-status mt-2 mb-0 text-center err';
-                status.textContent = 'Preencha a data e o endereço.';
+                setStatus('address-status', 'Preencha a data e o endereço.', 'err');
                 return;
             }
 
             btn.disabled = true;
-            status.className = 'admin-status mt-2 mb-0 text-center';
-            status.textContent = 'Salvando...';
-
-            const formData = new URLSearchParams();
-            formData.append('action', 'setConfig');
-            formData.append('data', data);
-            formData.append('endereco', endereco);
-            formData.append('cidade', cidade);
-
+            setStatus('address-status', 'Salvando...');
             try {
-                await fetch(API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData.toString()
-                });
+                const res = await postAPI({ action: 'setConfig', senha: adminPass, data, hora, endereco, cidade });
+                if (!res.ok) {
+                    if (res.erro === 'senha') return logoutAdmin('Sessão expirada. Entre novamente.');
+                    setStatus('address-status', apiErrorMessage(res), 'err');
+                    return;
+                }
                 applyDate(data);
+                applyTime(hora);
                 applyAddress(endereco, cidade);
-                status.className = 'admin-status mt-2 mb-0 text-center ok';
-                status.textContent = '✓ Dados do evento salvos!';
+                setStatus('address-status', '✓ Dados do evento salvos!', 'ok');
             } catch (err) {
-                status.className = 'admin-status mt-2 mb-0 text-center err';
-                status.textContent = 'Não foi possível salvar. Tente novamente.';
+                setStatus('address-status', 'Não foi possível salvar. Tente novamente.', 'err');
             } finally {
                 btn.disabled = false;
             }
@@ -764,14 +860,61 @@
             setTimeout(() => { loadGifts(); }, 3500);
         }
 
-        async function submitRSVP() {
-            const nome = document.getElementById('rsvp-name').value.trim();
-            const tipo = document.getElementById('rsvp-type').value;
+        // ---------- Confirmação de presença: até 3 pessoas por vez ----------
+        const RSVP_MAX = 3;
 
-            if(!nome) {
-                alert('Por favor, preencha seu nome completo.');
+        function addRsvpPerson(focus) {
+            const list = document.getElementById('rsvp-people');
+            if (list.children.length >= RSVP_MAX) return;
+
+            const row = document.createElement('div');
+            row.className = 'rsvp-person';
+            row.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="rsvp-person-title"></span>
+                    <button type="button" class="btn btn-link p-0 rsvp-remove">Remover</button>
+                </div>
+                <div class="row g-2">
+                    <div class="col-12 col-sm-8">
+                        <input type="text" class="form-control rsvp-name" placeholder="Nome e sobrenome" aria-label="Nome completo">
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <select class="form-select rsvp-type" aria-label="Adulto ou criança">
+                            <option value="Adulto" selected>Adulto</option>
+                            <option value="Criança">Criança</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            row.querySelector('.rsvp-remove').addEventListener('click', () => {
+                row.remove();
+                refreshRsvpPeople();
+            });
+            list.appendChild(row);
+            refreshRsvpPeople();
+            if (focus) row.querySelector('.rsvp-name').focus();
+        }
+
+        function refreshRsvpPeople() {
+            const rows = [...document.querySelectorAll('#rsvp-people .rsvp-person')];
+            rows.forEach((row, i) => {
+                row.querySelector('.rsvp-person-title').textContent = i === 0 ? 'Seu nome completo' : `Acompanhante ${i}`;
+                row.querySelector('.rsvp-remove').hidden = i === 0;
+            });
+            document.getElementById('rsvp-add-btn').hidden = rows.length >= RSVP_MAX;
+        }
+
+        async function submitRSVP() {
+            const pessoas = [...document.querySelectorAll('#rsvp-people .rsvp-person')].map(row => ({
+                nome: row.querySelector('.rsvp-name').value.trim(),
+                tipo: row.querySelector('.rsvp-type').value
+            }));
+
+            if (pessoas.some(p => !p.nome)) {
+                setStatus('rsvp-status', 'Preencha o nome de todas as pessoas (ou remova o acompanhante em branco).', 'err');
                 return;
             }
+            setStatus('rsvp-status', '');
 
             document.getElementById('rsvp-form').style.display = 'none';
             document.getElementById('rsvp-success').style.display = 'block';
@@ -779,8 +922,9 @@
 
             const formData = new URLSearchParams();
             formData.append('action', 'rsvp');
-            formData.append('nome', nome);
-            formData.append('tipo', tipo);
+            formData.append('nome', pessoas[0].nome);
+            formData.append('tipo', pessoas[0].tipo);
+            formData.append('pessoas', JSON.stringify(pessoas));
 
             await fetch(API_URL, {
                 method: 'POST',
@@ -789,10 +933,13 @@
                 body: formData.toString()
             });
 
+            const nomes = pessoas.map(p => escapeHTML(p.nome));
+            const lista = nomes.length > 1 ? `${nomes.slice(0, -1).join(', ')} e ${nomes[nomes.length - 1]}` : nomes[0];
+
             setTimeout(() => {
                 document.getElementById('rsvp-success').innerHTML = `
                     <h4 class="script" style="font-size: 2.4rem;">Presença Confirmada! ♡</h4>
-                    <p class="text-muted mt-2">Obrigado por confirmar, ${escapeHTML(nome)}. Nos vemos no Chá!</p>
+                    <p class="text-muted mt-2">Obrigado por confirmar, ${escapeHTML(pessoas[0].nome)}. Presença confirmada para: <strong>${lista}</strong>. Nos vemos no Chá!</p>
                 `;
             }, 1500);
         }
@@ -801,32 +948,32 @@
             const item = document.getElementById('item-name').value.trim();
             const link = document.getElementById('item-link').value.trim();
             const imagem = document.getElementById('item-img').value.trim();
+            const btn = document.getElementById('add-gift-btn');
 
             if(!item || !link || !imagem) {
-                alert('Preencha todos os campos!');
+                setStatus('gift-status', 'Preencha todos os campos!', 'err');
                 return;
             }
 
-            alert('Adicionando item...');
-
-            const formData = new URLSearchParams();
-            formData.append('action', 'add');
-            formData.append('item', item);
-            formData.append('link', link);
-            formData.append('imagem', imagem);
-
-            await fetch(API_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData.toString()
-            });
-
-            document.getElementById('item-name').value = '';
-            document.getElementById('item-link').value = '';
-            document.getElementById('item-img').value = '';
-
-            setTimeout(() => { showPage('gifts-page'); loadGifts(); }, 2500);
+            btn.disabled = true;
+            setStatus('gift-status', 'Adicionando item...');
+            try {
+                const res = await postAPI({ action: 'add', senha: adminPass, item, link, imagem });
+                if (!res.ok) {
+                    if (res.erro === 'senha') return logoutAdmin('Sessão expirada. Entre novamente.');
+                    setStatus('gift-status', apiErrorMessage(res), 'err');
+                    return;
+                }
+                document.getElementById('item-name').value = '';
+                document.getElementById('item-link').value = '';
+                document.getElementById('item-img').value = '';
+                setStatus('gift-status', '✓ Presente cadastrado!', 'ok');
+                loadGifts();
+            } catch (err) {
+                setStatus('gift-status', 'Não foi possível cadastrar. Tente novamente.', 'err');
+            } finally {
+                btn.disabled = false;
+            }
         }
     </script>
 </body>
